@@ -1,0 +1,22 @@
+body {
+background-color: LightSteelBlue;
+}
+
+h1 {
+	color: brown;
+}
+
+samp {
+font-family: "Lucida Console";
+color: #444444;
+/* color: gray; */
+/* background-color: white; */
+}
+
+code {
+/* font-family: "Courier New"; */
+font-family: "Courier";
+color: Navy;
+/* font-size: 12px; */
+/* background-color: LightGreen; */
+}
