@@ -391,12 +391,12 @@ Q.scene('hud',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet.png, coins.png, spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","land.png", { tilew: 32, tileh: 32 });
   // Or from a .json asset that defines sprite locations
-  Q.compileSheets("spritesheet.png","spritesheet.json","spritesheet2.png", "spritesheet2.json");
+  Q.compileSheets("spritesheet2.png", "spritesheet2.json");
   Q.animations('player', {
       walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
       walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/6, flip: false, loop: true },
