@@ -34,7 +34,7 @@ Q.Sprite.extend("Player",{
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 90,           // You can also set additional properties that can
-      y: 1000, 
+      y: 600, 
 // be overridden on object creation
       direction: "right",
     });
@@ -172,7 +172,7 @@ Q.Sprite.extend("Enemy",{
 Q.scene("level1",function(stage) {
 
   // Add in a repeater for a little parallax action
-  stage.insert(new Q.Repeater({ asset: "cavebackground.png", speedX: 0.5, speedY: 0.5 }));
+  stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
 
   // Add in a tile layer, and make it the collision layer
   stage.collisionLayer(new Q.TileLayer({
@@ -188,16 +188,32 @@ Q.scene("level1",function(stage) {
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
   // Add in a couple of enemies
-  stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
-  stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
-  stage.insert(new Q.Enemy({ x: 600, y: 900 }));
-  stage.insert(new Q.Enemy({ x: 300, y: 950 }));
-  stage.insert(new Q.Enemy({ x: 700, y: 700 }));
-  stage.insert(new Q.Enemy({ x: 600, y: 400 }));
+   stage.insert(new Q.Enemy({ x: 300, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 400, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 500, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 600, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 700, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 800, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 900, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 1000, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 1100, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 1200, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 1300, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 1400, y: 500 }));
+  //stage.insert(new Q.Enemy({ x: 1500, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 1600, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 1800, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 2200, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 2500, y: 500 }));
+  stage.insert(new Q.Enemy({ x: 4000, y: 200 }));
+  stage.insert(new Q.Enemy({ x: 4200, y: 200 }));
+  stage.insert(new Q.Enemy({ x: 4500, y: 200 }));
+  stage.insert(new Q.Enemy({ x: 4800, y: 200 }));
+
 
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
-  stage.insert(new Q.Door({ x: 1130, y: 232 }));
+  stage.insert(new Q.Door({ x: 5420, y: 460 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
     Q.stageScene("level" + Q.state.get("level")); 
@@ -367,10 +383,10 @@ Q.scene('hud',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet.png, spritesheet.json, level1.json, level2.json, level3.json, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet.png, coins.png, spritesheet.json, level1.json, level2.json, level3.json, land.png, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
-  Q.sheet("tiles","newtiles.png", { tilew: 32, tileh: 32 });
+  Q.sheet("tiles","land.png", { tilew: 32, tileh: 32 });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet.png","spritesheet.json");
   Q.animations('player', {
