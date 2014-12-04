@@ -124,6 +124,12 @@ Q.Sprite.extend("Door", {
   }
 });
 
+Q.Sprite.extend("Coins", {
+  init: function(p) {
+    this._super(p, { sheet: 'coins', sprite: 'coins' });
+  }
+});
+
 // ## Enemy Sprite
 // Create the Enemy class to add in some baddies
 Q.Sprite.extend("Enemy",{
@@ -210,6 +216,8 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Enemy({ x: 4500, y: 200 }));
   stage.insert(new Q.Enemy({ x: 4800, y: 200 }));
 
+  
+  stage.insert(new Q.Coins({ x: 350, y:500}));
 
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
@@ -383,12 +391,12 @@ Q.scene('hud',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet.png, coins.png, spritesheet.json, level1.json, level2.json, level3.json, land.png, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet.png, coins.png, spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, newtiles.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","land.png", { tilew: 32, tileh: 32 });
   // Or from a .json asset that defines sprite locations
-  Q.compileSheets("spritesheet.png","spritesheet.json");
+  Q.compileSheets("spritesheet.png","spritesheet.json","spritesheet2.png", "spritesheet2.json");
   Q.animations('player', {
       walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
       walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/6, flip: false, loop: true },
