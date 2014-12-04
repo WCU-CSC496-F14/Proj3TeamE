@@ -204,15 +204,15 @@ Q.scene("level1",function(stage) {
   //stage.insert(new Q.Enemy({ x: 1000, y: 500 }));
   //stage.insert(new Q.Enemy({ x: 1100, y: 500 }));
   stage.insert(new Q.Wolf({ x: 1200, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 1300, y: 500 }));
+  //stage.insert(new Q.Wolf({ x: 1300, y: 500 }));
   stage.insert(new Q.Wolf({ x: 1400, y: 500 }));
   //stage.insert(new Q.Enemy({ x: 1500, y: 500 }));
   stage.insert(new Q.Wolf({ x: 1600, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 1800, y: 500 }));
+  //stage.insert(new Q.Wolf({ x: 1800, y: 500 }));
   stage.insert(new Q.Wolf({ x: 2200, y: 500 }));
   stage.insert(new Q.Wolf({ x: 2500, y: 500 }));
   stage.insert(new Q.Wolf({ x: 4000, y: 200 }));
-  stage.insert(new Q.Wolf({ x: 4200, y: 200 }));
+  //stage.insert(new Q.Wolf({ x: 4200, y: 200 }));
   stage.insert(new Q.Wolf({ x: 4500, y: 200 }));
   stage.insert(new Q.Wolf({ x: 4800, y: 200 }));
 
@@ -398,8 +398,8 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet2.png", "spritesheet2.json");
   Q.animations('player', {
-      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
-      walk_left: { frames:  [0,1,2,3,4,5,6,7], rate: 1/6, flip: true, loop: true },
+      walk_right: { frames: [0,1,2,3,4,5,6,7,8], rate: 1/6, flip: false, loop: true },
+      walk_left: { frames:  [1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
       jump_right: { frames: [16], rate: 1/1, flip: false },
       jump_left: { frames:  [17], rate: 1/1, flip: false },
       fall_right: { frames:  [18], rate: 1/1, flip: false },
@@ -408,8 +408,8 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
       stand_left: { frames: [10], rate: 1/1, flip: false },
   });
   Q.animations('wolf', {
-      walk_right: { frames: [0,1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
-      walk_left: { frames:  [8,9,10,11,12,13,14,15], rate: 1/6, flip: false, loop: true },
+      walk_right: { frames: [0,1,2], rate: 1/6, flip: false, loop: true },
+      walk_left: { frames:  [0,1,2], rate: 1/6, flip: false, loop: true },
       jump_right: { frames: [16], rate: 1/1, flip: false },
       jump_left: { frames:  [17], rate: 1/1, flip: false },
       fall_right: { frames:  [18], rate: 1/1, flip: false },
