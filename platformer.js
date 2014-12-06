@@ -511,7 +511,7 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.state.reset({ score: 0, lives: 3 });
+    Q.state.reset({ score: 0, lives: 3, level: 1 });
     Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
