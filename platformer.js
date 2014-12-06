@@ -35,7 +35,7 @@ Q.Sprite.extend("Player",{
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 200,           // You can also set additional properties that can
       y: 600,
-
+      points: [[-32,23],[32.23],[32-41],[-32.-41]],
 	  scale: "0.8",
 // be overridden on object creation
       direction: "right",
@@ -143,7 +143,7 @@ Q.Sprite.extend("Coins", {
 
 Q.Sprite.extend("Spike", {
   init: function(p) {
-    this._super(p, { sheet: 'spike', sprite: 'spike', scale: "0.5" });
+    this._super(p, { sheet: 'spike', sprite: 'spike', scale: "0.6" });
 	  this.add('2d');
 	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
@@ -184,7 +184,7 @@ Q.Sprite.extend("Spikes", {
 
 Q.Sprite.extend("Stump",{
   init: function(p) {
-    this._super(p, { sheet: 'stump', vx: 70, frames: 0});
+    this._super(p, { sheet: 'stump', vx: 70, frames: 0, scale: "0.7"});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
