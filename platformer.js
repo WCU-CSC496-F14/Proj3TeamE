@@ -312,7 +312,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 300, y:575}));
   stage.insert(new Q.Coins({ x: 400, y:550}));
   stage.insert(new Q.Coins({ x: 650, y:575}));
-  stage.insert(new Q.Coins({ x: 1135, y:500}));
+  stage.insert(new Q.Coins({ x: 1150, y:550}));
   stage.insert(new Q.Coins({ x: 550, y:575}));
   stage.insert(new Q.Coins({ x: 1650, y:550}));
   stage.insert(new Q.Coins({ x: 2050, y:550}));
