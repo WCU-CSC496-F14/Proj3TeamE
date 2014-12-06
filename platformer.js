@@ -299,7 +299,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 350, y:575}));
   stage.insert(new Q.Coins({ x: 450, y:550}));
   stage.insert(new Q.Coins({ x: 850, y:575}));
-  stage.insert(new Q.Coins({ x: 1050, y:550}));
+  stage.insert(new Q.Coins({ x: 1050, y:575}));
   stage.insert(new Q.Coins({ x: 1250, y:575}));
   stage.insert(new Q.Coins({ x: 1450, y:550}));
   stage.insert(new Q.Coins({ x: 1850, y:550}));
@@ -312,7 +312,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 300, y:575}));
   stage.insert(new Q.Coins({ x: 400, y:550}));
   stage.insert(new Q.Coins({ x: 650, y:575}));
-  stage.insert(new Q.Coins({ x: 1150, y:575}));
+  stage.insert(new Q.Coins({ x: 1150, y:500}));
   stage.insert(new Q.Coins({ x: 550, y:575}));
   stage.insert(new Q.Coins({ x: 1650, y:550}));
   stage.insert(new Q.Coins({ x: 2050, y:550}));
@@ -321,7 +321,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 3350, y:375}));
   stage.insert(new Q.Coins({ x: 3650, y:375}));
   stage.insert(new Q.Coins({ x: 3850, y:375}));
-  stage.insert(new Q.Coins({ x: 4850, y:425}));
+  stage.insert(new Q.Coins({ x: 4850, y:400}));
   stage.insert(new Q.Coins({ x: 5050, y:400}));
   
   
