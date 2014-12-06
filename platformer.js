@@ -144,8 +144,8 @@ Q.Sprite.extend("Coins", {
 Q.Sprite.extend("Spike", {
   init: function(p) {
     this._super(p, { sheet: 'spike', sprite: 'spike', scale: "0.9" });
-	
-	  this.on("bump.left,bump.right,bump.bottom",function(collision) {
+	  this.add('2d');
+	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
       	Q.state.dec("lives", 1);
       	Q.stageScene('hud', 3, collision.obj.p);
@@ -327,7 +327,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 5050, y:400}));
   
   
-   stage.insert(new Q.Spike({ x: 350, y:650}));
+   stage.insert(new Q.Spike({ x: 300, y:600}));
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
   stage.insert(new Q.Portal({ x: 5400, y: 450 }));
@@ -439,10 +439,56 @@ Q.scene("level3",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
+ stage.insert(new Q.Snailblue({ x: 800, y: 400 }));
+  stage.insert(new Q.Stump({ x: 1100, y: 400 }));
+  stage.insert(new Q.Stump({ x: 600, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 3100, y: 300 }));
+   stage.insert(new Q.Snailblue({ x: 2800, y: 200 }));
+  stage.insert(new Q.Stump({ x: 1500, y: 200 }));
+  stage.insert(new Q.Stump({ x: 1900, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 3200, y: 200 }));
 
+  stage.insert(new Q.Snailblue({ x: 1400, y: 500 }));
+  stage.insert(new Q.Stump({ x: 1600, y: 500 }));
+  stage.insert(new Q.Stump({ x: 2200, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 2500, y: 500 }));
+  stage.insert(new Q.Stump({ x: 3600, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3200, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3800, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3000, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 4000, y: 200 }));
+  stage.insert(new Q.Stump({ x: 4500, y: 200 }));
+  stage.insert(new Q.Stump({ x: 5100, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 5300, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 5200, y: 200 }));
+  
+  stage.insert(new Q.Coins({ x: 350, y:450}));
+  stage.insert(new Q.Coins({ x: 450, y:500}));
+  stage.insert(new Q.Coins({ x: 850, y:450}));
+  stage.insert(new Q.Coins({ x: 1050, y:550}));
+  stage.insert(new Q.Coins({ x: 1250, y:550}));
+  stage.insert(new Q.Coins({ x: 1450, y:500}));
+  stage.insert(new Q.Coins({ x: 1850, y:450}));
+  stage.insert(new Q.Coins({ x: 2250, y:450}));
+  stage.insert(new Q.Coins({ x: 2650, y:550}));
+  stage.insert(new Q.Coins({ x: 3250, y:500}));
+  stage.insert(new Q.Coins({ x: 3650, y:500}));
+  stage.insert(new Q.Coins({ x: 3850, y:500}));
+  stage.insert(new Q.Coins({ x: 4250, y:450}));
+  stage.insert(new Q.Coins({ x: 4650, y:450}));
+  
+  stage.insert(new Q.Coins({ x: 500, y:450}));
+  stage.insert(new Q.Coins({ x: 550, y:500}));
+  stage.insert(new Q.Coins({ x: 650, y:450}));
+  stage.insert(new Q.Coins({ x: 1150, y:550}));
+  stage.insert(new Q.Coins({ x: 1350, y:550}));
+  stage.insert(new Q.Coins({ x: 1550, y:500}));
+  stage.insert(new Q.Coins({ x: 1950, y:450}));
+  stage.insert(new Q.Coins({ x: 2850, y:450}));
+  stage.insert(new Q.Coins({ x: 5000, y:400}));
 
   // Finally add in the tower goal
-  stage.insert(new Q.Portal({ x: 160, y: 230 }));
+   stage.insert(new Q.Portal({ x: 5450, y: 450 }));
   stage.on("complete",function() { 
   	Q.stageScene("endGame",1, { label: "You Won!" });
   });
