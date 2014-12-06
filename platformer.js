@@ -303,7 +303,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 1250, y:575}));
   stage.insert(new Q.Coins({ x: 1450, y:550}));
   stage.insert(new Q.Coins({ x: 1850, y:550}));
-  stage.insert(new Q.Coins({ x: 2250, y:550}));
+  stage.insert(new Q.Coins({ x: 2250, y:510}));
   stage.insert(new Q.Coins({ x: 2650, y:550}));
   stage.insert(new Q.Coins({ x: 3250, y:375}));
   stage.insert(new Q.Coins({ x: 4250, y:400}));
@@ -316,8 +316,8 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 550, y:575}));
   stage.insert(new Q.Coins({ x: 1650, y:550}));
   stage.insert(new Q.Coins({ x: 2050, y:550}));
-  stage.insert(new Q.Coins({ x: 2500, y:550}));
-  stage.insert(new Q.Coins({ x: 3000, y:550}));
+  stage.insert(new Q.Coins({ x: 2500, y:510}));
+  stage.insert(new Q.Coins({ x: 3000, y:500}));
   stage.insert(new Q.Coins({ x: 3350, y:375}));
   stage.insert(new Q.Coins({ x: 3650, y:375}));
   stage.insert(new Q.Coins({ x: 3850, y:375}));
@@ -389,8 +389,8 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Coins({ x: 1050, y:550}));
   stage.insert(new Q.Coins({ x: 1250, y:550}));
   stage.insert(new Q.Coins({ x: 1450, y:550}));
-  stage.insert(new Q.Coins({ x: 1850, y:500}));
-  stage.insert(new Q.Coins({ x: 2250, y:450}));
+  stage.insert(new Q.Coins({ x: 1850, y:550}));
+  stage.insert(new Q.Coins({ x: 2250, y:500}));
   stage.insert(new Q.Coins({ x: 2650, y:550}));
   stage.insert(new Q.Coins({ x: 3250, y:500}));
   stage.insert(new Q.Coins({ x: 3650, y:500}));
@@ -404,8 +404,8 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Coins({ x: 1150, y:550}));
   stage.insert(new Q.Coins({ x: 1350, y:550}));
   stage.insert(new Q.Coins({ x: 1550, y:550}));
-  stage.insert(new Q.Coins({ x: 1950, y:500}));
-  stage.insert(new Q.Coins({ x: 2850, y:450}));
+  stage.insert(new Q.Coins({ x: 1950, y:550}));
+  stage.insert(new Q.Coins({ x: 2850, y:500}));
   stage.insert(new Q.Coins({ x: 5000, y:400}));
 
   // Finally add in the tower goal
