@@ -383,7 +383,7 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Snailblue({ x: 5300, y: 200 }));
   stage.insert(new Q.Snailblue({ x: 5200, y: 200 }));
   
-  stage.insert(new Q.Coins({ x: 350, y:450}));
+  stage.insert(new Q.Coins({ x: 350, y:500}));
   stage.insert(new Q.Coins({ x: 450, y:500}));
   stage.insert(new Q.Coins({ x: 850, y:450}));
   stage.insert(new Q.Coins({ x: 1050, y:550}));
