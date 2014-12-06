@@ -155,6 +155,7 @@ Q.Sprite.extend("Spike", {
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
+			collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
@@ -177,6 +178,7 @@ Q.Sprite.extend("Spikes", {
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
+			collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
