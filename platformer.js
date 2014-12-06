@@ -34,7 +34,9 @@ Q.Sprite.extend("Player",{
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 200,           // You can also set additional properties that can
-      y: 300, 
+      y: 600,
+
+	  scale: "0.8",
 // be overridden on object creation
       direction: "right",
     });
@@ -54,13 +56,18 @@ Q.Sprite.extend("Player",{
 
       // Check the collision, if it's the Tower, you win!
 	  //changed to if its a tower go to the next level
-      if(collision.obj.isA("Door")) {
+      if(collision.obj.isA("Portal")) {
         //Q.stageScene("endGame",1, { label: "You Won!" }); 
         //this.destroy();
 		this.stage.trigger("complete");
       }
+	  if(collision.obj.isA("Coins")) {
+	     collision.obj.destroy();
+        Q.state.inc('score', 25);
+        Q.stageScene('hud', 3, collision.obj.p);
+	  }
     });
-
+   
 	this.on("jump");
     this.on("jumped");
 
@@ -118,23 +125,66 @@ Q.Sprite.extend("Player",{
 
 // ## Tower Sprite
 // Sprites can be simple, the Tower sprite just sets a custom sprite sheet
-Q.Sprite.extend("Door", {
+Q.Sprite.extend("Portal", {
   init: function(p) {
-    this._super(p, { sheet: 'door', sprite: 'door' });
+    this._super(p, { sheet: 'portal', sprite: 'portal', scale: "0.5" });
+	this.add('animation');
+	this.play("spinning_portal", 1);
   }
 });
 
 Q.Sprite.extend("Coins", {
   init: function(p) {
-    this._super(p, { sheet: 'coins', sprite: 'coins' });
+    this._super(p, { sheet: 'coins', sprite: 'coins', scale: "0.5" });
+	this.add('animation');
+	this.play("spin_forever", 1);
   }
 });
 
-// ## wolf Sprite
-// Create the wolf class to add in some baddies
-Q.Sprite.extend("Wolf",{
+Q.Sprite.extend("Spike", {
   init: function(p) {
-    this._super(p, { sheet: 'wolf', vx: 100 });
+    this._super(p, { sheet: 'spike', sprite: 'spike', scale: "0.9" });
+	
+	  this.on("bump.left,bump.right,bump.bottom",function(collision) {
+      if(collision.obj.isA("Player")) { 
+      	Q.state.dec("lives", 1);
+      	Q.stageScene('hud', 3, collision.obj.p);
+      	if (Q.state.get("lives") == 0) {
+    		collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died" });
+		}
+		else {
+			collision.obj.resetLevel();
+		}
+      }
+    });
+
+  }
+});
+
+Q.Sprite.extend("Spikes", {
+  init: function(p) {
+    this._super(p, { sheet: 'spikes', sprite: 'spikes', scale: "0.9" });
+	this.add('2d');
+	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
+      if(collision.obj.isA("Player")) { 
+      	Q.state.dec("lives", 1);
+      	Q.stageScene('hud', 3, collision.obj.p);
+      	if (Q.state.get("lives") == 0) {
+    		collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died" });
+		}
+		else {
+			collision.obj.resetLevel();
+		}
+      }
+    });
+  }
+});
+
+Q.Sprite.extend("Stump",{
+  init: function(p) {
+    this._super(p, { sheet: 'stump', vx: 70, frames: 0});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -155,8 +205,8 @@ Q.Sprite.extend("Wolf",{
 		}
       }
     });
-
-    // If the enemy gets hit on the top, destroy it
+	
+	// If the enemy gets hit on the top, destroy it
     // and give the user a "hop"
     this.on("bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
@@ -168,10 +218,50 @@ Q.Sprite.extend("Wolf",{
       }
     });
   },
-  
-  destroyed: function() {
- }
+	  destroyed: function() {
+	}
+	
 });
+	
+	Q.Sprite.extend("Snailblue",{
+  init: function(p) {
+    this._super(p, { sheet: 'snailblue', vx: 60, frames: 0});
+
+    // Enemies use the Bounce AI to change direction 
+    // whenver they run into something.
+    this.add('2d, aiBounce');
+
+    // Listen for a sprite collision, if it's the player,
+    // end the game unless the enemy is hit on top
+    this.on("bump.left,bump.right,bump.bottom",function(collision) {
+      if(collision.obj.isA("Player")) { 
+      	Q.state.dec("lives", 1);
+      	Q.stageScene('hud', 3, collision.obj.p);
+      	if (Q.state.get("lives") == 0) {
+    		collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died" });
+		}
+		else {
+			collision.obj.resetLevel();
+		}
+      }
+    });
+	
+	// If the enemy gets hit on the top, destroy it
+    // and give the user a "hop"
+    this.on("bump.top",function(collision) {
+      if(collision.obj.isA("Player")) { 
+        this.destroy();
+        Q.audio.play('killenemy.mp3');
+        collision.obj.p.vy = -300;
+        Q.state.inc('score', 50);
+        Q.stageScene('hud', 3, collision.obj.p);
+      }
+    });
+  },
+	  destroyed: function() {
+	}
+	});
 
 // ## Level1 scene
 // Create a new scene called level 1
@@ -194,34 +284,56 @@ Q.scene("level1",function(stage) {
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
   // Add in a couple of enemies
-   stage.insert(new Q.Wolf({ x: 300, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 400, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 500, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 600, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 700, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 800, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 900, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 1000, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 1100, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 1200, y: 500 }));
-  //stage.insert(new Q.Wolf({ x: 1300, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 1400, y: 500 }));
-  //stage.insert(new Q.Enemy({ x: 1500, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 1600, y: 500 }));
-  //stage.insert(new Q.Wolf({ x: 1800, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 2200, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 2500, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 4000, y: 200 }));
-  //stage.insert(new Q.Wolf({ x: 4200, y: 200 }));
-  stage.insert(new Q.Wolf({ x: 4500, y: 200 }));
-  stage.insert(new Q.Wolf({ x: 4800, y: 200 }));
-
+  stage.insert(new Q.Snailblue({ x: 300, y: 600 }));
+  stage.insert(new Q.Stump({ x: 600, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 700, y: 500 }));
+  stage.insert(new Q.Stump({ x: 1200, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 1400, y: 500 }));
+  stage.insert(new Q.Stump({ x: 1600, y: 500 }));
+  stage.insert(new Q.Stump({ x: 2200, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 2500, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 4000, y: 200 }));
+  stage.insert(new Q.Stump({ x: 4500, y: 200 }));
+  stage.insert(new Q.Stump({ x: 4800, y: 200 }));
   
-  stage.insert(new Q.Coins({ x: 350, y:500}));
-
+  stage.insert(new Q.Coins({ x: 350, y:550}));
+  stage.insert(new Q.Coins({ x: 450, y:500}));
+  stage.insert(new Q.Coins({ x: 850, y:550}));
+  stage.insert(new Q.Coins({ x: 1050, y:550}));
+  stage.insert(new Q.Coins({ x: 1250, y:550}));
+  stage.insert(new Q.Coins({ x: 1450, y:500}));
+  stage.insert(new Q.Coins({ x: 1850, y:525}));
+  stage.insert(new Q.Coins({ x: 2250, y:510}));
+  stage.insert(new Q.Coins({ x: 2650, y:550}));
+  stage.insert(new Q.Coins({ x: 3250, y:300}));
+  stage.insert(new Q.Coins({ x: 3650, y:300}));
+  stage.insert(new Q.Coins({ x: 3850, y:300}));
+  stage.insert(new Q.Coins({ x: 4250, y:350}));
+  stage.insert(new Q.Coins({ x: 4650, y:400}));
+  
+  stage.insert(new Q.Coins({ x: 300, y:550}));
+  stage.insert(new Q.Coins({ x: 400, y:500}));
+  stage.insert(new Q.Coins({ x: 650, y:550}));
+  stage.insert(new Q.Coins({ x: 1150, y:550}));
+  stage.insert(new Q.Coins({ x: 550, y:550}));
+  stage.insert(new Q.Coins({ x: 1650, y:500}));
+  stage.insert(new Q.Coins({ x: 2050, y:525}));
+  stage.insert(new Q.Coins({ x: 2500, y:510}));
+  stage.insert(new Q.Coins({ x: 3000, y:500}));
+  stage.insert(new Q.Coins({ x: 3350, y:300}));
+  stage.insert(new Q.Coins({ x: 3650, y:300}));
+  stage.insert(new Q.Coins({ x: 3850, y:300}));
+  stage.insert(new Q.Coins({ x: 4850, y:350}));
+  stage.insert(new Q.Coins({ x: 5050, y:400}));
+  
+  
+   stage.insert(new Q.Spike({ x: 350, y:650}));
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
-  stage.insert(new Q.Door({ x: 5420, y: 460 }));
+  stage.insert(new Q.Portal({ x: 5400, y: 450 }));
+  
+  
+  
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
     Q.stageScene("level" + Q.state.get("level")); 
@@ -250,22 +362,56 @@ Q.scene("level2",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  stage.insert(new Q.Enemy({ x: 500, y: 1000 }));
-  stage.insert(new Q.Enemy({ x: 700, y: 1000 }));
-  stage.insert(new Q.Enemy({ x: 300, y: 750 }));
-  stage.insert(new Q.Enemy({ x: 800, y: 1000 }));
-  stage.insert(new Q.Enemy({ x: 600, y: 800 }));
-  stage.insert(new Q.Enemy({ x: 1100, y: 800 }));
-  stage.insert(new Q.Enemy({ x: 1500, y: 620 }));
-  stage.insert(new Q.Enemy({ x: 1400, y: 620 }));
-  stage.insert(new Q.Enemy({ x: 1700, y: 500 }));
-  stage.insert(new Q.Enemy({ x: 800, y: 200 }));
-  stage.insert(new Q.Enemy({ x: 900, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 1400, y: 420 }));
-  stage.insert(new Q.Enemy({ x: 1700, y: 300 }));
+ stage.insert(new Q.Snailblue({ x: 800, y: 400 }));
+  stage.insert(new Q.Stump({ x: 1100, y: 400 }));
+  stage.insert(new Q.Stump({ x: 600, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 3100, y: 300 }));
+   stage.insert(new Q.Snailblue({ x: 2800, y: 200 }));
+  stage.insert(new Q.Stump({ x: 1500, y: 200 }));
+  stage.insert(new Q.Stump({ x: 1900, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 3200, y: 200 }));
+
+  stage.insert(new Q.Snailblue({ x: 1400, y: 500 }));
+  stage.insert(new Q.Stump({ x: 1600, y: 500 }));
+  stage.insert(new Q.Stump({ x: 2200, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 2500, y: 500 }));
+  stage.insert(new Q.Stump({ x: 3600, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3200, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3800, y: 200 }));
+  stage.insert(new Q.Stump({ x: 3000, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 4000, y: 200 }));
+  stage.insert(new Q.Stump({ x: 4500, y: 200 }));
+  stage.insert(new Q.Stump({ x: 5100, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 5300, y: 200 }));
+  stage.insert(new Q.Snailblue({ x: 5200, y: 200 }));
+  
+  stage.insert(new Q.Coins({ x: 350, y:450}));
+  stage.insert(new Q.Coins({ x: 450, y:500}));
+  stage.insert(new Q.Coins({ x: 850, y:450}));
+  stage.insert(new Q.Coins({ x: 1050, y:550}));
+  stage.insert(new Q.Coins({ x: 1250, y:550}));
+  stage.insert(new Q.Coins({ x: 1450, y:500}));
+  stage.insert(new Q.Coins({ x: 1850, y:450}));
+  stage.insert(new Q.Coins({ x: 2250, y:450}));
+  stage.insert(new Q.Coins({ x: 2650, y:550}));
+  stage.insert(new Q.Coins({ x: 3250, y:500}));
+  stage.insert(new Q.Coins({ x: 3650, y:500}));
+  stage.insert(new Q.Coins({ x: 3850, y:500}));
+  stage.insert(new Q.Coins({ x: 4250, y:450}));
+  stage.insert(new Q.Coins({ x: 4650, y:450}));
+  
+  stage.insert(new Q.Coins({ x: 500, y:450}));
+  stage.insert(new Q.Coins({ x: 550, y:500}));
+  stage.insert(new Q.Coins({ x: 650, y:450}));
+  stage.insert(new Q.Coins({ x: 1150, y:550}));
+  stage.insert(new Q.Coins({ x: 1350, y:550}));
+  stage.insert(new Q.Coins({ x: 1550, y:500}));
+  stage.insert(new Q.Coins({ x: 1950, y:450}));
+  stage.insert(new Q.Coins({ x: 2850, y:450}));
+  stage.insert(new Q.Coins({ x: 5000, y:400}));
 
   // Finally add in the tower goal
-   stage.insert(new Q.Door({ x: 1275, y: 10 }));
+   stage.insert(new Q.Portal({ x: 5450, y: 450 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
     Q.stageScene("level" + Q.state.get("level")); 
@@ -293,15 +439,10 @@ Q.scene("level3",function(stage) {
   stage.viewport.scale = 2;
 
   // Add in a couple of enemies
-  stage.insert(new Q.Enemy({ x: 500, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 700, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 800, y: 100 }));
-  stage.insert(new Q.Enemy({ x: 300, y: 200 }));
-  stage.insert(new Q.Enemy({ x: 900, y: 300 }));
-  stage.insert(new Q.Enemy({ x: 600, y: 400 }));
+
 
   // Finally add in the tower goal
-  stage.insert(new Q.Door({ x: 160, y: 230 }));
+  stage.insert(new Q.Portal({ x: 160, y: 230 }));
   stage.on("complete",function() { 
   	Q.stageScene("endGame",1, { label: "You Won!" });
   });
@@ -394,33 +535,32 @@ Q.scene('hud',function(stage) {
 Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
-  Q.sheet("tiles","land.png", { tilew: 32, tileh: 32 });
+  Q.sheet("tiles","land.png", { tilew: 32, tileh: 32, sy:10 });
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet2.png", "spritesheet2.json");
   Q.animations('player', {
       walk_right: { frames: [0,1,2,3,4,5,6,7,8], rate: 1/6, flip: false, loop: true },
-      walk_left: { frames:  [1,2,3,4,5,6,7], rate: 1/6, flip: false, loop: true },
+      walk_left: { frames:  [1,2,3,4,5,6,7], rate: 1/6, flip: "x", loop: true },
       jump_right: { frames: [16], rate: 1/1, flip: false },
       jump_left: { frames:  [17], rate: 1/1, flip: false },
       fall_right: { frames:  [18], rate: 1/1, flip: false },
       fall_left: { frames:  [19], rate: 1/1, flip: false },
       stand_right: { frames:[2], rate: 1/1, flip: false },
-      stand_left: { frames: [10], rate: 1/1, flip: false },
+      stand_left: { frames: [2], rate: 1/1, flip: "x" },
   });
-  Q.animations('wolf', {
-      walk_right: { frames: [0,1,2], rate: 1/6, flip: false, loop: true },
-      walk_left: { frames:  [0,1,2], rate: 1/6, flip: false, loop: true },
-      jump_right: { frames: [16], rate: 1/1, flip: false },
-      jump_left: { frames:  [17], rate: 1/1, flip: false },
-      fall_right: { frames:  [18], rate: 1/1, flip: false },
-      fall_left: { frames:  [19], rate: 1/1, flip: false },
-      stand_right: { frames:[2], rate: 1/1, flip: false },
-      stand_left: { frames: [10], rate: 1/1, flip: false },
+  
+  Q.animations('coins', {
+      spin_forever: { frames: [0,1,2,6,7,8,9], rate: 1/6, flip: false, loop: true },
   });
+  
+  Q.animations('portal', {
+	  spinning_portal: { frames: [0,1,2,3], rate: 1/2, flip: false, loop: true}
+  });
+  
   Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
-  Q.audio.play('Rick-astley.mp3',{ loop: true });
+ // Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
 });
