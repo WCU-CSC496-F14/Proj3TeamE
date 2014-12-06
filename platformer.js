@@ -112,7 +112,7 @@ Q.Sprite.extend("Player",{
 		Q.stageScene('hud', 3, this.p);
 		if (Q.state.get("lives") <= 0) {
     		this.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
 			this.resetLevel();
@@ -148,13 +148,14 @@ Q.Sprite.extend("Spike", {
 	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
       	Q.state.dec("lives", 1);
+      	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
       	if (Q.state.get("lives") == 0) {
     		collision.obj.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
-			collision.obj.resetLevel();
+			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
     });
@@ -169,13 +170,14 @@ Q.Sprite.extend("Spikes", {
 	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
       	Q.state.dec("lives", 1);
+      	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
       	if (Q.state.get("lives") == 0) {
     		collision.obj.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
-			collision.obj.resetLevel();
+			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
     });
@@ -195,13 +197,15 @@ Q.Sprite.extend("Stump",{
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
       	Q.state.dec("lives", 1);
+      	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
       	if (Q.state.get("lives") == 0) {
     		collision.obj.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
-			collision.obj.resetLevel();
+			collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
     });
@@ -236,13 +240,15 @@ Q.Sprite.extend("Stump",{
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
       	Q.state.dec("lives", 1);
+      	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
       	if (Q.state.get("lives") == 0) {
     		collision.obj.destroy();
-			Q.stageScene("endGame",1, { label: "You Died" });
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
 		else {
-			collision.obj.resetLevel();
+			collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
 		}
       }
     });
@@ -502,15 +508,17 @@ Q.scene('endGame',function(stage) {
   }));
 
   var button = container.insert(new Q.UI.Button({ x: 0, y: 0, fill: "#FFFFFF",
-                                                  label: "Play Again" }))         
+                                                  label: stage.options.text }))         
   var label = container.insert(new Q.UI.Text({x:10, y: -20 - button.p.h, 
                                                    label: stage.options.label, color: "white" }));
   // When the button is clicked, clear all the stages
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.state.reset({ score: 0, lives: 3, level: 1 });
-    Q.stageScene('level1');
+    if (Q.state.get("lives") == 0) {
+    	Q.state.reset({ score: 0, lives: 3, level: 1 });
+    }
+    Q.stageScene('level' + Q.state.get("level"));
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
@@ -576,7 +584,7 @@ Q.scene('hud',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3, hit.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","land.png", { tilew: 32, tileh: 32, sy:10 });
