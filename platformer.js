@@ -150,7 +150,7 @@ Q.Sprite.extend("Spike", {
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives")) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
@@ -173,7 +173,7 @@ Q.Sprite.extend("Spikes", {
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
@@ -201,7 +201,7 @@ Q.Sprite.extend("Stump",{
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives")) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
@@ -244,7 +244,7 @@ Q.Sprite.extend("Stump",{
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
@@ -292,7 +292,7 @@ Q.scene("level1",function(stage) {
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
   // Add in a couple of enemies
-  stage.insert(new Q.Snailblue({ x: 300, y: 600 }));
+  stage.insert(new Q.Snailblue({ x: 400, y: 600 }));
   stage.insert(new Q.Stump({ x: 600, y: 500 }));
   stage.insert(new Q.Snailblue({ x: 700, y: 500 }));
   stage.insert(new Q.Stump({ x: 1200, y: 500 }));
@@ -333,7 +333,7 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Coins({ x: 5050, y:400}));
   
   
-   stage.insert(new Q.Spike({ x: 300, y:600}));
+   stage.insert(new Q.Spikes({ x: 350, y:600}));
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
   stage.insert(new Q.Portal({ x: 5400, y: 450 }));
@@ -517,7 +517,7 @@ Q.scene('endGame',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    if (Q.state.get("lives") == 0) {
+    if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
     	Q.state.reset({ score: 0, lives: 3, level: 1 });
     }
     Q.stageScene('level' + Q.state.get("level"));
