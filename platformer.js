@@ -150,7 +150,7 @@ Q.Sprite.extend("Spike", {
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0 || Q.state.get("lives")) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
@@ -201,7 +201,7 @@ Q.Sprite.extend("Stump",{
       	Q.state.dec("lives", 1);
       	Q.audio.play('hit.mp3');
       	Q.stageScene('hud', 3, collision.obj.p);
-      	if (Q.state.get("lives") == 0 || Q.state.get("lives")) {
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
     		collision.obj.destroy();
 			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
 		}
