@@ -188,11 +188,11 @@ Q.Sprite.extend("Spikes", {
 
 Q.Sprite.extend("Stump",{
   init: function(p) {
-    this._super(p, { sheet: 'stump', vx: 70, frames: 0, scale: "0.7"});
+    this._super(p, { sheet: 'stump', sprite: 'stump', vx: 70, frames: 0, scale: "0.9", points: [[-23,14],[23,14],[23,-16],[-23,-16]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
-    this.add('2d, aiBounce');
+    this.add('2d, aiBounce, animation');
 
     // Listen for a sprite collision, if it's the player,
     // end the game unless the enemy is hit on top
@@ -225,7 +225,15 @@ Q.Sprite.extend("Stump",{
     });
   },
 	  destroyed: function() {
-	}
+	},
+	
+	step: function(dt) {
+        if(this.p.vx > 0) {
+          this.play("walk_right", 1);
+        } else if(this.p.vx < 0) {
+          this.play("walk_left", 1);
+        }
+    },
 	
 });
 
@@ -662,6 +670,11 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   });
   
   Q.animations('wolf', {
+  	  walk_left: { frames: [0,1,2], rate: 1/3, flip: false, loop:true},
+  	  walk_right: { frames: [0,1,2], rate: 1/3, flip: "x", loop:true},
+  });
+  
+  Q.animations('stump', {
   	  walk_left: { frames: [0,1,2], rate: 1/3, flip: false, loop:true},
   	  walk_right: { frames: [0,1,2], rate: 1/3, flip: "x", loop:true},
   });
