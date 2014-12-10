@@ -403,7 +403,7 @@ Q.scene("level1",function(stage) {
    //stage.insert(new Q.Spikes({ x: 750, y:620}));
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
-  stage.insert(new Q.Portal({ x: 5980, y: 450 }));
+  stage.insert(new Q.Portal({ x: 5960, y: 450 }));
   
   
   stage.on("complete",function() { 
@@ -435,7 +435,7 @@ Q.scene("level2",function(stage) {
 
   // Add in a couple of enemies
  stage.insert(new Q.Snailblue({ x: 1300, y: 400 }));
-  stage.insert(new Q.Stump({ x: 1600, y: 400 }));
+  stage.insert(new Q.Wolf({ x: 1600, y: 400 }));
   stage.insert(new Q.Wolf({ x: 1100, y: 500 }));
   stage.insert(new Q.Snailblue({ x: 3600, y: 300 }));
    stage.insert(new Q.Snailblue({ x: 3300, y: 200 }));
@@ -676,7 +676,7 @@ Q.scene('title',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.stageScene('level1');
+    Q.stageScene('level2');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
@@ -758,7 +758,7 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   	  walk_right: { frames: [0], rate: 1, flip: "x", loop:true},
   });
   
-  Q.state.reset({ score: 0, lives: 3, level: 1 });
+  Q.state.reset({ score: 0, lives: 3, level: 2 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
