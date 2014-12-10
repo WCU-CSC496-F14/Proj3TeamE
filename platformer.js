@@ -33,8 +33,8 @@ Q.Sprite.extend("Player",{
     this._super(p, {
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
-      x: 600,           // You can also set additional properties that can
-      y: 600,
+      x: 5000,           // You can also set additional properties that can
+      y: 200,
       points: [[-32,28],[32,28],[32,-41],[-32,-41]],
 	  scale: "0.8",
 // be overridden on object creation
@@ -479,7 +479,7 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Coins({ x: 5500, y:400}));
 
   // Finally add in the tower goal
-   stage.insert(new Q.Portal({ x: 5750, y: 450 }));
+   stage.insert(new Q.Portal({ x: 6050, y: 450 }));
   stage.on("complete",function() { 
   	Q.state.inc("level", 1);
     Q.stageScene("level" + Q.state.get("level")); 
