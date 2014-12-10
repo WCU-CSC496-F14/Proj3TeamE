@@ -717,7 +717,7 @@ Q.scene('hud',function(stage) {
 // assets that are already loaded will be skipped
 // The callback will be triggered when everything is loaded
 
-Q.load("spritesheet3.json, spritesheet3.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3, hit.mp3",  function() {//["Rick-astley.mp3"],
+Q.load("spritesheet3.json, spritesheet3.png, level1.json, level2.json, titlelogo.png, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3, hit.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
   Q.sheet("tiles","land.png", { tilew: 32, tileh: 32});
@@ -761,7 +761,7 @@ Q.load("spritesheet3.json, spritesheet3.png, level1.json, level2.json, level3.js
   Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
-  Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
+  Q.stageScene("title",1, { label: 'titlelogo.png' }); 
  // Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
 });
