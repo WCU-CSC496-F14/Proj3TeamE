@@ -33,8 +33,8 @@ Q.Sprite.extend("Player",{
     this._super(p, {
       sprite: "player",
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
-      x: 5000,           // You can also set additional properties that can
-      y: 200,
+      x: 600,           // You can also set additional properties that can
+      y: 600,
       points: [[-32,28],[32,28],[32,-41],[-32,-41]],
 	  scale: "0.8",
 // be overridden on object creation
@@ -676,7 +676,7 @@ Q.scene('title',function(stage) {
   // and restart the game.
   button.on("click",function() {
     Q.clearStages();
-    Q.stageScene('level2');
+    Q.stageScene('level1');
     Q.stageScene('hud', 3, Q('Player').first().p);
   });
 
@@ -758,7 +758,7 @@ Q.load("spritesheet3.json, spritesheet3.png, level1.json, level2.json, level3.js
   	  walk_right: { frames: [0], rate: 1, flip: "x", loop:true},
   });
   
-  Q.state.reset({ score: 0, lives: 3, level: 2 });
+  Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: "Super Awesome Platformer" }); 
