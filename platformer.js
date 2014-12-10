@@ -634,7 +634,7 @@ Q.scene("level4",function(stage) {
    stage.on("complete",function() { 
   	Q.stageScene("endGame",1, { label: "You Won!" });
   });
-
+});
 
 // To display a game over / game won popup box, 
 // create a endGame scene that takes in a `label` option
