@@ -289,7 +289,7 @@ Q.Sprite.extend("Wolf",{
 	
 	Q.Sprite.extend("Snailblue",{
   init: function(p) {
-    this._super(p, { sheet: 'snailblue', vx: 60, frames: 0});
+    this._super(p, { sheet: 'snailblue', vx: 60, frames: 0, points: [[-15,10],[15,10],[15,-12],[-15,-12]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -326,7 +326,15 @@ Q.Sprite.extend("Wolf",{
     });
   },
 	  destroyed: function() {
-	}
+	},
+	
+	step: function(dt) {
+        if(this.p.vx > 0) {
+			this.flip="x";
+        } else if(this.p.vx < 0) {
+          this.flip=false;
+        }
+    },
 	});
 
 // ## Level1 scene
