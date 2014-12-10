@@ -103,7 +103,7 @@ Q.Sprite.extend("Player",{
         } else if(this.p.vx < 0) {
             this.play("walk_left", 1);
           	this.p.direction = "left";
-        } else if (this.p.vy==0) & (this.p.vx==0){
+        } else if (this.p.vy==0) && (this.p.vx==0){
           this.play("stand_" + this.p.direction, 1);
         }
 		//add jump reference here?
