@@ -272,9 +272,9 @@ Q.Sprite.extend("Wolf",{
 	
 	step: function(dt) {
         if(this.p.vx > 0) {
-          this.play("walk_right");
+          this.play("walk_right", 1);
         } else if(this.p.vx < 0) {
-          this.play("walk_left");
+          this.play("walk_left", 1);
         }
     },
 });
