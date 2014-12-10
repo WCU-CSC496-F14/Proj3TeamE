@@ -268,7 +268,7 @@ Q.Sprite.extend("Wolf",{
     });
   },
 	  destroyed: function() {
-	}
+	},
 	
 	step: function(dt) {
         if(this.p.vx > 0) {
