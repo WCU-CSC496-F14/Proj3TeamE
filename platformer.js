@@ -94,6 +94,7 @@ Q.Sprite.extend("Player",{
     var processed = false;
       
     if(!processed) { 
+	
       this.p.gravity = 1;
 
         if(this.p.vx > 0) {
@@ -102,9 +103,10 @@ Q.Sprite.extend("Player",{
         } else if(this.p.vx < 0) {
             this.play("walk_left", 1);
           	this.p.direction = "left";
-        } else {
+        } else if (this.p.vy==0) & (this.p.vx==0){
           this.play("stand_" + this.p.direction, 1);
         }
+		//add jump reference here?
     }
 	//for level3, player dies if they fall too far
 	if(this.p.y > 1500) {
@@ -734,6 +736,7 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
       fall_left: { frames:  [19], rate: 1/1, flip: false },
       stand_right: { frames:[8], rate: 1/1, flip: false },
       stand_left: { frames: [8], rate: 1/1, flip: "x" },
+	  
   });
   
   Q.animations('coins', {
