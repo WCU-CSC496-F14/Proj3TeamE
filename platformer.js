@@ -235,7 +235,7 @@ Q.Sprite.extend("Wolf",{
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
-    this.add('2d, aiBounce');
+    this.add('2d, aiBounce, animation');
 
     // Listen for a sprite collision, if it's the player,
     // end the game unless the enemy is hit on top
@@ -272,9 +272,9 @@ Q.Sprite.extend("Wolf",{
 	
 	step: function(dt) {
         if(this.p.vx > 0) {
-          this.play("walk_right", 1);
+          this.play("walk_right");
         } else if(this.p.vx < 0) {
-          this.play("walk_left", 1);
+          this.play("walk_left");
         }
     },
 });
