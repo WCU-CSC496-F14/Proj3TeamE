@@ -231,7 +231,7 @@ Q.Sprite.extend("Stump",{
 
 Q.Sprite.extend("Wolf",{
   init: function(p) {
-    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7", points: [[-32,24],[32,24],[32,-20],[-32,-20]],});
+    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7", points: [[-32,18],[32,18],[32,-24],[-32,-24]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
