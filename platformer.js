@@ -761,7 +761,7 @@ Q.load("spritesheet3.json, spritesheet3.png, level1.json, level2.json, titlelogo
   Q.state.reset({ score: 0, lives: 3, level: 1 });
   
   // Finally, call stageScene to run the game
-  Q.stageScene("title",1, { label: 'titlelogo.png' }); 
+  Q.stageScene("title",1, { label: 'Rainbow Unicorn Sunshine' }); 
  // Q.audio.play('Rick-astley.mp3',{ loop: true });
 });
 });
