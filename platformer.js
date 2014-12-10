@@ -188,7 +188,7 @@ Q.Sprite.extend("Spikes", {
 
 Q.Sprite.extend("Stump",{
   init: function(p) {
-    this._super(p, { sheet: 'stump', sprite: 'stump', vx: 70, frames: 0, scale: "0.9", points: [[-23,14],[23,14],[23,-16],[-23,-16]],});
+    this._super(p, { sheet: 'stump', sprite: 'stump', vx: 70, frames: 0, points: [[-32,4],[32,4],[32,-60],[-32,-60]], scale: "0.9", points: [[-23,14],[23,14],[23,-16],[-23,-16]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -239,7 +239,7 @@ Q.Sprite.extend("Stump",{
 
 Q.Sprite.extend("Wolf",{
   init: function(p) {
-    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7", points: [[-32,18],[32,18],[32,-24],[-32,-24]],});
+    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7", points: [[-32,10],[32,10],[32,-35],[-32,-35]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -289,7 +289,7 @@ Q.Sprite.extend("Wolf",{
 	
 	Q.Sprite.extend("Snailblue",{
   init: function(p) {
-    this._super(p, { sheet: 'snailblue', sprite: 'snailblue', vx: 60, frames: 0, points: [[-15,10],[15,10],[15,-12],[-15,-12]],});
+    this._super(p, { sheet: 'snailblue', sprite: 'snailblue', vx: 60, frames: 0, points: [[-32,5],[32,5],[32,-45],[-32,-45]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -724,7 +724,7 @@ Q.scene('hud',function(stage) {
 Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.json, land.png, cavebackground.png, background-wall.png, Rick-astley.mp3, killenemy.mp3, jump.mp3, hit.mp3",  function() {//["Rick-astley.mp3"],
 
   // Sprites sheets can be created manually
-  Q.sheet("tiles","land.png", { tilew: 32, tileh: 32, sy:10 });
+  Q.sheet("tiles","land.png", { tilew: 32, tileh: 32});
   // Or from a .json asset that defines sprite locations
   Q.compileSheets("spritesheet2.png", "spritesheet2.json");
   Q.animations('player', {
