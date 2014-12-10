@@ -231,7 +231,7 @@ Q.Sprite.extend("Stump",{
 
 Q.Sprite.extend("Wolf",{
   init: function(p) {
-    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7"});
+    this._super(p, { sheet: 'wolf', sprite: 'wolf', vx: 70, frames: 0, scale: "0.7", points: [[-32,24],[32,24],[32,-20],[-32,-20]],});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -662,8 +662,8 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   });
   
   Q.animations('wolf', {
-  	  walk_left: { frames: [0,1,2], rate: 1/6, flip: false, loop:true},
-  	  walk_right: { frames: [0,1,2], rate: 1/6, flip: "x", loop:true},
+  	  walk_left: { frames: [0,1,2], rate: 1/3, flip: false, loop:true},
+  	  walk_right: { frames: [0,1,2], rate: 1/3, flip: "x", loop:true},
   });
   
   Q.state.reset({ score: 0, lives: 3, level: 1 });
