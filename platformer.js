@@ -35,7 +35,7 @@ Q.Sprite.extend("Player",{
       sheet: "player",  // Setting a sprite sheet sets sprite width and height
       x: 200,           // You can also set additional properties that can
       y: 600,
-      points: [[-32,23],[32,23],[32,-41],[-32,-41]],
+      points: [[-32,28],[32,28],[32,-41],[-32,-41]],
 	  scale: "0.8",
 // be overridden on object creation
       direction: "right",
