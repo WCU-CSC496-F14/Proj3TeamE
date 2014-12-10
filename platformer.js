@@ -662,8 +662,8 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   });
   
   Q.animations('wolf', {
-  	  walk_left: { frames: [0,1,2], rate 1/6, flip: false, loop:true},
-  	  walk_right: { frames: [0,1,2], rate 1/6, flip: "x", loop:true},
+  	  walk_left: { frames: [0,1,2], rate: 1/6, flip: false, loop:true},
+  	  walk_right: { frames: [0,1,2], rate: 1/6, flip: "x", loop:true},
   });
   
   Q.state.reset({ score: 0, lives: 3, level: 1 });
