@@ -228,6 +228,56 @@ Q.Sprite.extend("Stump",{
 	}
 	
 });
+
+Q.Sprite.extend("Wolf",{
+  init: function(p) {
+    this._super(p, { sheet: 'wolf', vx: 70, frames: 0, scale: "0.7"});
+
+    // Enemies use the Bounce AI to change direction 
+    // whenver they run into something.
+    this.add('2d, aiBounce');
+
+    // Listen for a sprite collision, if it's the player,
+    // end the game unless the enemy is hit on top
+    this.on("bump.left,bump.right,bump.bottom",function(collision) {
+      if(collision.obj.isA("Player")) { 
+      	Q.state.dec("lives", 1);
+      	Q.audio.play('hit.mp3');
+      	Q.stageScene('hud', 3, collision.obj.p);
+      	if (Q.state.get("lives") == 0 || Q.state.get("lives") < 0) {
+    		collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "Game Over!", text: "Play Again" });
+		}
+		else {
+			collision.obj.destroy();
+			Q.stageScene("endGame",1, { label: "You Died", text: "Respawn" });
+		}
+      }
+    });
+	
+	// If the enemy gets hit on the top, destroy it
+    // and give the user a "hop"
+    this.on("bump.top",function(collision) {
+      if(collision.obj.isA("Player")) { 
+        this.destroy();
+        Q.audio.play('killenemy.mp3');
+        collision.obj.p.vy = -300;
+        Q.state.inc('score', 100);
+        Q.stageScene('hud', 3, collision.obj.p);
+      }
+    });
+  },
+	  destroyed: function() {
+	}
+	
+	step: function(dt) {
+        if(this.p.vx > 0) {
+          this.play("walk_right");
+        } else if(this.p.vx < 0) {
+          this.play("walk_left");
+        }
+    },
+});
 	
 	Q.Sprite.extend("Snailblue",{
   init: function(p) {
@@ -292,7 +342,7 @@ Q.scene("level1",function(stage) {
   stage.add("viewport").follow(player);
   stage.viewport.scale = 2;
   // Add in a couple of enemies
-  stage.insert(new Q.Snailblue({ x: 400, y: 600 }));
+  stage.insert(new Q.Wolf({ x: 400, y: 600 }));
   stage.insert(new Q.Stump({ x: 600, y: 500 }));
   stage.insert(new Q.Snailblue({ x: 700, y: 500 }));
   stage.insert(new Q.Stump({ x: 1200, y: 500 }));
@@ -609,6 +659,11 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   
   Q.animations('portal', {
 	  spinning_portal: { frames: [0,1,2,3], rate: 1/2, flip: false, loop: true}
+  });
+  
+  Q.animations('wolf', {
+  	  walk_left: { frames: [0,1,2], rate 1/6, flip: false, loop:true},
+  	  walk_right: { frames: [0,1,2], rate 1/6, flip: "x", loop:true},
   });
   
   Q.state.reset({ score: 0, lives: 3, level: 1 });
