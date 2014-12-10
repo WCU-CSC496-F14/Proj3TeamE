@@ -166,7 +166,7 @@ Q.Sprite.extend("Spike", {
 
 Q.Sprite.extend("Spikes", {
   init: function(p) {
-    this._super(p, { sheet: 'spikes', sprite: 'spikes', scale: "0.5" });
+    this._super(p, { sheet: 'spikes', sprite: 'spikes', points: [[-32,15],[32,15],[32,-49],[-32,-49]], scale: "0.5" });
 	this.add('2d');
 	  this.on("bump.left,bump.right,bump.bottom,bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
