@@ -679,9 +679,6 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Snailblue({ x: 3000, y: 300 }));
   stage.insert(new Q.Stump({ x: 4300, y: 200 }));
   stage.insert(new Q.Snailblue({ x: 4500, y: 200 }));
-  stage.insert(new Q.Stump({ x: 5000, y: 200 }));
-  stage.insert(new Q.Stump({ x: 5600, y: 200 }));
-  stage.insert(new Q.Wolf({ x: 5800, y: 200 }));
   
   stage.insert(new Q.Coins({ x: 850, y:500}));
   stage.insert(new Q.Coins({ x: 950, y:500}));
