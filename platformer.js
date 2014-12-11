@@ -443,10 +443,10 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Stump({ x: 2400, y: 200 }));
   stage.insert(new Q.Snailblue({ x: 3600, y: 200 }));
 
-  stage.insert(new Q.Snailblue({ x: 1900, y: 500 }));
-  stage.insert(new Q.Wolf({ x: 2100, y: 500 }));
-  stage.insert(new Q.Stump({ x: 2700, y: 500 }));
-  stage.insert(new Q.Snailblue({ x: 3000, y: 500 }));
+  stage.insert(new Q.Snailblue({ x: 1900, y: 300 }));
+  stage.insert(new Q.Wolf({ x: 2100, y: 300 }));
+  stage.insert(new Q.Stump({ x: 2700, y: 300 }));
+  stage.insert(new Q.Snailblue({ x: 3000, y: 300 }));
   stage.insert(new Q.Stump({ x: 4300, y: 200 }));
   stage.insert(new Q.Snailblue({ x: 4500, y: 200 }));
   stage.insert(new Q.Stump({ x: 5000, y: 200 }));
@@ -457,14 +457,14 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Coins({ x: 950, y:500}));
   stage.insert(new Q.Coins({ x: 1350, y:450}));
   stage.insert(new Q.Coins({ x: 1550, y:550}));
-  stage.insert(new Q.Coins({ x: 1750, y:550}));
-  stage.insert(new Q.Coins({ x: 1950, y:550}));
-  stage.insert(new Q.Coins({ x: 2350, y:550}));
-  stage.insert(new Q.Coins({ x: 2750, y:500}));
-  stage.insert(new Q.Coins({ x: 3150, y:550}));
-  stage.insert(new Q.Coins({ x: 3750, y:500}));
-  stage.insert(new Q.Coins({ x: 4150, y:500}));
-  stage.insert(new Q.Coins({ x: 4350, y:500}));
+  stage.insert(new Q.Coins({ x: 1750, y:450}));
+  stage.insert(new Q.Coins({ x: 1950, y:450}));
+  stage.insert(new Q.Coins({ x: 2350, y:450}));
+  stage.insert(new Q.Coins({ x: 2750, y:400}));
+  stage.insert(new Q.Coins({ x: 3150, y:450}));
+  stage.insert(new Q.Coins({ x: 3750, y:400}));
+  stage.insert(new Q.Coins({ x: 4150, y:400}));
+  stage.insert(new Q.Coins({ x: 4350, y:400}));
   stage.insert(new Q.Coins({ x: 4750, y:450}));
   stage.insert(new Q.Coins({ x: 5150, y:450}));
   
