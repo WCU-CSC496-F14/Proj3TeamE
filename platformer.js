@@ -604,39 +604,38 @@ Q.scene("level1",function(stage) {
   stage.insert(new Q.Wolf({ x: 4900, y: 200 }));
   stage.insert(new Q.Stump({ x: 5200, y: 200 }));
   
-  stage.insert(new Q.Coins({ x: 750, y:575}));
-  stage.insert(new Q.Coins({ x: 850, y:550}));
-  stage.insert(new Q.Coins({ x: 1250, y:575}));
-  stage.insert(new Q.Coins({ x: 1450, y:575}));
-  stage.insert(new Q.Coins({ x: 1650, y:575}));
-  stage.insert(new Q.Coins({ x: 1850, y:550}));
-  stage.insert(new Q.Coins({ x: 2250, y:550}));
-  stage.insert(new Q.Coins({ x: 2650, y:510}));
-  stage.insert(new Q.Coins({ x: 3050, y:550}));
-  stage.insert(new Q.Coins({ x: 3650, y:375}));
-  stage.insert(new Q.Coins({ x: 4650, y:400}));
-  stage.insert(new Q.Coins({ x: 5050, y:400}));
+  stage.insert(new Q.Coins({ x: 1231, y:580}));
+  stage.insert(new Q.Coins({ x: 1632, y:580}));
+  stage.insert(new Q.Coins({ x: 1500, y:540}));
+  stage.insert(new Q.Coins({ x: 1390, y:540}));
+  stage.insert(new Q.Coins({ x: 1826, y:580}));
+  stage.insert(new Q.Coins({ x: 2205, y:580}));
+  stage.insert(new Q.Coins({ x: 2777, y:580}));
+  stage.insert(new Q.Coins({ x: 2827, y:580}));
+  stage.insert(new Q.Coins({ x: 3032, y:580}));
+  stage.insert(new Q.Coins({ x: 3082, y:580}));
+  stage.insert(new Q.Coins({ x: 2895, y:540}));
   
-  stage.insert(new Q.Coins({ x: 700, y:575}));
-  stage.insert(new Q.Coins({ x: 800, y:550}));
-  stage.insert(new Q.Coins({ x: 1050, y:575}));
-  stage.insert(new Q.Coins({ x: 1550, y:550}));
-  stage.insert(new Q.Coins({ x: 950, y:575}));
-  stage.insert(new Q.Coins({ x: 2050, y:550}));
-  stage.insert(new Q.Coins({ x: 2450, y:550}));
-  stage.insert(new Q.Coins({ x: 2900, y:510}));
-  stage.insert(new Q.Coins({ x: 3400, y:500}));
-  stage.insert(new Q.Coins({ x: 3750, y:375}));
-  stage.insert(new Q.Coins({ x: 4050, y:375}));
-  stage.insert(new Q.Coins({ x: 4250, y:375}));
-  stage.insert(new Q.Coins({ x: 5250, y:400}));
-  stage.insert(new Q.Coins({ x: 5450, y:400}));
+  stage.insert(new Q.Coins({ x: 2965, y:540}));
+  stage.insert(new Q.Coins({ x: 3427, y:580}));
+  stage.insert(new Q.Coins({ x: 3490, y:548}));
+  stage.insert(new Q.Coins({ x: 3553, y:516}));
+  stage.insert(new Q.Coins({ x: 3616, y:484}));
+  stage.insert(new Q.Coins({ x: 3679, y:452}));
+  stage.insert(new Q.Coins({ x: 3745, y:420}));
+  stage.insert(new Q.Coins({ x: 3808, y:420}));
+  stage.insert(new Q.Coins({ x: 4515, y:420}));
+  stage.insert(new Q.Coins({ x: 4559, y:420}));
+  stage.insert(new Q.Coins({ x: 5100, y:452}));
+  stage.insert(new Q.Coins({ x: 5393, y:452}));
+  stage.insert(new Q.Coins({ x: 5500, y:420}));
+  stage.insert(new Q.Coins({ x: 5564, y:420}));
   
   
    //stage.insert(new Q.Spikes({ x: 750, y:620}));
   // Finally add in the tower goal
   //stage.insert(new Q.Tower({ x: 180, y: 50 }));
-  stage.insert(new Q.Portal({ x: 5960, y: 450 }));
+  stage.insert(new Q.Portal({ x: 5980, y: 450 }));
   
   
   stage.on("complete",function() { 
