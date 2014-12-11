@@ -1,12 +1,3 @@
-// # Quintus platformer example
-//
-// [Run the example](../quintus/examples/platformer/index.html)
-// WARNING: this game must be run from a non-file:// url
-// as it loads a level json file.
-//
-// This is the example from the website homepage, it consists
-// a simple, non-animated platformer with some enemies and a 
-// target for the player.
 window.addEventListener("load",function() {
 
 // Set up an instance of the Quintus engine  and include
@@ -56,25 +47,6 @@ Q.Sprite.extend("Player",{
     // It also checks to make sure the player is on a horizontal surface before
     // letting them jump.
     this.add('2d, platformerControls, animation');
-
-    // Write event handlers to respond hook into behaviors.
-    // hit.sprite is called everytime the player collides with a sprite
-    /*this.on("hit.sprite",function(collision) {
-
-      // Check the collision, if it's the Tower, you win!
-	  //changed to if its a tower go to the next level
-      if(collision.obj.isA("Portal")) {
-        //Q.stageScene("endGame",1, { label: "You Won!" }); 
-        //this.destroy();
-		this.stage.trigger("complete");
-      }
-	  if(collision.obj.isA("Coins")) {
-	     collision.obj.destroy();
-        Q.state.inc('score', 25);
-        Q.stageScene('hud', 3, collision.obj.p);
-        Q.audio.play('coin.mp3');
-	  }
-    });*/
    
 	this.on("jump");
     this.on("jumped");
@@ -104,23 +76,6 @@ Q.Sprite.extend("Player",{
   	Q.state.set("x", this.p.x);
   	Q.state.set("y", this.p.y);
   	Q.stageScene('hud', 3, this.p);
-    /*var processed = false;
-      
-    if(!processed) { 
-	
-      this.p.gravity = 1;
-
-        if(this.p.vx > 0) {
-            this.play("walk_right", 1);
-          	this.p.direction = "right";
-        } else if(this.p.vx < 0) {
-            this.play("walk_left", 1);
-          	this.p.direction = "left";
-        } else if (this.p.vy==0 && this.p.vx==0){
-          this.play("stand_" + this.p.direction, 1);
-        }
-		//add jump reference here?
-    }*/
     
     var processed = false;
       
@@ -152,7 +107,7 @@ Q.Sprite.extend("Player",{
             }	
         }
     }
-	//for level3, player dies if they fall too far
+	// player dies if they fall too far
 	if(this.p.y > 1500) {
 		Q.state.dec("lives", 1);
 		Q.stageScene('hud', 3, this.p);
@@ -167,8 +122,6 @@ Q.Sprite.extend("Player",{
   },
   
   enemyHit: function(data) {
-    var col = data.col;
-    var enemy = data.enemy;
     this.p.vy = -150;
     if (col.normalX == 1) {
       // Hit from left.
@@ -179,14 +132,6 @@ Q.Sprite.extend("Player",{
       // Hit from right;
       this.p.x +=15;
       this.p.y -=15;
-    }
-    this.p.immune = true;
-    this.p.immuneTimer = 0;
-    this.p.immuneOpacity = 1;
-    this.p.strength -= 25;
-    Q.stageScene('hud', 3, this.p);
-    if (this.p.strength == 0) {
-      this.resetLevel();
     }
   },
 
@@ -254,18 +199,6 @@ Q.Sprite.extend("Spike", {
       Q.audio.play('hit.mp3');
     }
   },
-
-  die: function(col) {
-    if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
-      this.p.vx=this.p.vy=0;
-      this.play('dead');
-      this.p.dead = true;
-      var that = this;
-      col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
-    }
-  }
 });
 
 Q.Sprite.extend("Spikes", {
@@ -295,18 +228,6 @@ Q.Sprite.extend("Spikes", {
       Q.audio.play('hit.mp3');
     }
   },
-
-  die: function(col) {
-    if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
-      this.p.vx=this.p.vy=0;
-      this.play('dead');
-      this.p.dead = true;
-      var that = this;
-      col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
-    }
-  }
 });
 
 Q.Sprite.extend("Stump",{
@@ -374,13 +295,11 @@ Q.Sprite.extend("Stump",{
 
   die: function(col) {
     if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
+      Q.audio.play('killenemy.mp3');
       this.p.vx=this.p.vy=0;
-      this.play('dead');
       this.p.dead = true;
       var that = this;
       col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
     }
   }
 	
@@ -451,13 +370,11 @@ Q.Sprite.extend("Wolf",{
 
   die: function(col) {
     if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
+      Q.audio.play('killenemy.mp3');
       this.p.vx=this.p.vy=0;
-      this.play('dead');
       this.p.dead = true;
       var that = this;
       col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
     }
   }
 });
@@ -527,13 +444,11 @@ Q.Sprite.extend("Wolf",{
 
   die: function(col) {
     if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
+      Q.audio.play('killenemy.mp3');
       this.p.vx=this.p.vy=0;
-      this.play('dead');
       this.p.dead = true;
       var that = this;
       col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
     }
   }
 	});
@@ -542,7 +457,7 @@ Q.Sprite.extend("Wolf",{
   init: function(p) {
     this._super(p, { sheet: 'burns', sprite: 'burns', vx: 70, frames: 0,
     				type: Q.SPRITE_ENEMY, collisionMask: Q.SPRITE_DEFAULT,
-    				points: [[-24,44],[24,44],[24,-48],[-24,-48]]});
+    				points: [[-24,44],[24,44],[24,-48],[-24,-48]], hits: 0});
 
     // Enemies use the Bounce AI to change direction 
     // whenver they run into something.
@@ -577,11 +492,14 @@ Q.Sprite.extend("Wolf",{
     // and give the user a "hop"
     this.on("bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
-        this.destroy();
-        Q.audio.play('killenemy.mp3');
-        collision.obj.p.vy = -300;
-        Q.state.inc('score', 100);
-        Q.stageScene('hud', 3, collision.obj.p);
+      	this.hits++;
+      	Q.audio.play('killenemy.mp3');
+      	collision.obj.p.vy = -300;
+      	if (this.hits > 2) {
+        	this.destroy();
+        	Q.state.inc('score', 500);
+        	Q.stageScene('hud', 3, collision.obj.p);
+        }
       }
     });
   },
@@ -604,13 +522,11 @@ Q.Sprite.extend("Wolf",{
 
   die: function(col) {
     if(col.obj.isA("Player")) {
-      Q.audio.play('coin.mp3');
+      Q.audio.play('killenemy.mp3');
       this.p.vx=this.p.vy=0;
-      this.play('dead');
       this.p.dead = true;
       var that = this;
       col.obj.p.vy = -300;
-      this.p.deadTimer = 0;
     }
   }
 	
