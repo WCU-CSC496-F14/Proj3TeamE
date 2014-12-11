@@ -703,7 +703,7 @@ Q.scene("level2",function(stage) {
   stage.insert(new Q.Coins({ x: 2050, y:550}));
   stage.insert(new Q.Coins({ x: 2650, y:550}));
   stage.insert(new Q.Coins({ x: 3350, y:500}));
-  stage.insert(new Q.Coins({ x: 5500, y:400}));​
+  stage.insert(new Q.Coins({ x: 5500, y:400}));
 
   // Finally add in the tower goal
    stage.insert(new Q.Portal({ x: 5600, y: 450 }));
