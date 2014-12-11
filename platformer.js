@@ -122,6 +122,7 @@ Q.Sprite.extend("Player",{
   },
   
   enemyHit: function(data) {
+  	var col = data.col;
     this.p.vy = -150;
     if (col.normalX == 1) {
       // Hit from left.
