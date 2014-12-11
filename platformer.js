@@ -73,9 +73,6 @@ Q.Sprite.extend("Player",{
   },
   
   step: function(dt) {
-  	Q.state.set("x", this.p.x);
-  	Q.state.set("y", this.p.y);
-  	Q.stageScene('hud', 3, this.p);
     
     var processed = false;
       
@@ -966,12 +963,6 @@ Q.scene('hud',function(stage) {
     
   var health = container.insert(new Q.UI.Text({x:62, y: 95,
     label: "Health: " + txt2, color: "white" }));
-    
-    var x = container.insert(new Q.UI.Text({x:110, y: 110,
-    label: "x: " + Q.state.get("x"), color: "white" }));
-    
-    var y = container.insert(new Q.UI.Text({x:110, y: 135,
-    label: "y: " + Q.state.get("y"), color: "white" }));
 
   container.fit(20);
 });
@@ -1027,7 +1018,7 @@ Q.load("spritesheet2.json, spritesheet2.png, level1.json, level2.json, level3.js
   	  walk_right: { frames: [0,1,2], rate: 1/3, flip: "x", loop:true},
   });
   
-  Q.state.reset({ score: 0, lives: 3, level: 1, health: 99, x: 0, y: 0 });
+  Q.state.reset({ score: 0, lives: 3, level: 1, health: 99 });
   
   // Finally, call stageScene to run the game
   Q.stageScene("title",1, { label: 'Rainbow Unicorn Sunshine' }); 
