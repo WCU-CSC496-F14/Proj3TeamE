@@ -21,3 +21,6 @@ Sprites move Quintus animamtions
 Start Screen
 Game-Over screen
 some indication of a game state (number of lives left, a timer, number of points.) something to indicate progression.
+
+
+To play this game: http://wcu-csc496-f14.github.io/Proj3TeamE
